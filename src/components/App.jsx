@@ -11,14 +11,34 @@ import TransactionHistory from "./transactionHistory/TransactionHistory";
 import transactions from '../data/transactions.json';
 
 export const App = () => {
-console.log(user)
+
+  const transactionsWithNumberAmount = transactions.map(transaction => ({
+    ...transaction,
+    amount: Number(transaction.amount),
+  }));
 
   return (
-    <div>
-      <Profile condition={true} />
-      <Statistics />
-      <FriendList />
-      <TransactionHistory />
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: 20,
+        padding: 20,
+        backgroundColor: 'lightgrey',
+      }}
+    >
+      <Profile
+        username={user.username}
+        tag={user.tag}
+        location={user.location}
+        avatar={user.avatar}
+        stats={user.stats}
+      />
+      <Statistics title="Upload stats" stats={data} />
+      <FriendList friends={friends} />
+      <TransactionHistory items={transactionsWithNumberAmount} />
     </div>
   );
 };
